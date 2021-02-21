@@ -23,7 +23,7 @@ A nodejs application that can be used to write and save notes. This application 
 * [Note-taker](https://drive.google.com/file/d/1mNuUI9wi6TTO-6MELPLR9i1X-xeH_1c_/view)
 
 ### Screenshots 
-* GET `*` returns the `index.html` file. ![/](./public/assets/images/index.png)
+* GET `/` returns the `index.html` file. ![/](./public/assets/images/index.png)
 * GET `/notes` returns the `notes.html` file. ![/notes](./public/assets/images/notes.png)
 * GET `/api/notes` reads the `db.json` file and return all saved notes as JSON.![/api/notes](./public/assets/images/getnotes.png)
 * POST `/api/notes` receives a new note to save on the request.body, add it to the `db.json` file, 
