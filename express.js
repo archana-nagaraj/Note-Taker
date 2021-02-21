@@ -1,13 +1,12 @@
 const express = require('express');
 const path = require("path");
 const fs = require("fs");
-const notesdb = require("./db/db.json")
+const notesdb = require("./db/db.json") 
+const { v4: uuidv4 } = require('uuid');  // To give each note a unique id when it's saved 
 
 const app = express();  // instantiate the server
 // Use heroku port or local port
 const PORT = process.env.PORT || 3000;
-// const apiRoutes = require("./routes/apiRoutes");
-// const htmlRoutes = require("./routes/htmlRoutes");
 
 // Sets up the Express app to handle data parsing
 app.use(express.urlencoded({ extended: true }));
@@ -26,6 +25,7 @@ app.get('/notes', (req,res) => {
     res.sendFile(path.join(__dirname, './public/notes.html'));
 })
 
+// update database everytime a note is created or deleted a note
 function writeToNotesdb(notes) {
     fs.writeFile("./db/db.json",JSON.stringify(notes),err => {
         if (err) throw err;
@@ -36,7 +36,6 @@ function writeToNotesdb(notes) {
 // Get method reads db.json file and return all saved notes as JSON
 app.get('/api/notes',(req,res) => {
     res.json(notesdb);
-    //console.log(notesdb);
 })
 
 // Post method should receive a note to save the request body
@@ -46,11 +45,7 @@ app.get('/api/notes',(req,res) => {
 
 app.post('/api/notes', (req,res) => {
     let newNotes = req.body;
-    if (notesdb.length == 0){
-        req.body.id = "0";
-    } else{
-        req.body.id = JSON.stringify(JSON.parse(notesdb[notesdb.length - 1].id) + 1);
-    }
+    req.body.id = uuidv4().toString();
     //push the new note to db
     notesdb.push(newNotes);
     // Writes notes String to db.json
@@ -75,8 +70,8 @@ app.delete('/api/notes/:id', (req,res) => {
         }
     }
     // Rewrite the db.json file again.
-    writeToNotesdb(notesdb);
-    res.json(notesdb);
+writeToNotesdb(notesdb);
+res.json(notesdb);
 })
 
 
