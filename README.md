@@ -4,7 +4,8 @@
 
 ## Description
 
-A nodejs application that can be used to write and save notes. This application will use an Express.js back end and will save and retrieve note data from a JSON file. The Note Taker app is deployed and is live on [Heroku](https://archanas-note-taker.herokuapp.com/)
+A nodejs application that can be used to write and save notes. This application will use an Express.js back end and will save and retrieve note data from a JSON file. 
+**The Note Taker app is deployed and is live on [Heroku](https://archanas-note-taker.herokuapp.com/)**
 
 ## Table of Contents
 
